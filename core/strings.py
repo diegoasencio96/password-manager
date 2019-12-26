@@ -1,0 +1,3 @@
+APP_NAME = 'password-manager'
+APP_VERSION = '0.0.0'
+APP_VERSION_NAME = 'GENESIS'
