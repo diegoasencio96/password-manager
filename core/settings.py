@@ -25,7 +25,7 @@ SECRET_KEY = 'ps4jt5w4$cv511p#k@j7e-=66*pj!1v^-m4yj8u8#-x+^z618m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,7 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'structure.apps.StructureConfig',
     'utils.apps.UtilsConfig',
+    'import_export',
+    'django_cleanup',
+    'mptt',
+    'django_mptt_admin',
+    'adminsortable2',
+    'geoposition',
+    'corsheaders',
     'rest_framework',
+    'rest_framework_gis',
+    'rest_framework_swagger',
     'crispy_forms',
     'django_select2',
     'django_ajax',

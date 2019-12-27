@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  backend:
+    build: .
+    container_name: password-manager-backend
+    volumes:
+      - ./:/code/
+    depends_on:
+      - db
+      - redis
+    restart: on-failure
+
+  nginx:
+    restart: on-failure
+    container_name: password-manager-nginx
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./static:/code/static
+      - ./media:/code/media
+      - ./config/nginx/conf/password-manager.conf:/etc/nginx/conf.d/password-manager.conf
+    depends_on:
+      - backend
+
+  db:
+    image: postgres
+    container_name: password-manager-database
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5422:5432"
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: passwordmanager
+    restart: on-failure
+
+  redis:
+    restart: on-failure
+    container_name: password-manager-redis
+    image: redis:latest
+    ports:
+      - '6378:6379'
+
+volumes:
+  db-data:
+    driver: local
